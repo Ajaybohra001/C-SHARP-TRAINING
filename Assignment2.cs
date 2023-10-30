@@ -210,7 +210,7 @@ namespace Assignment2
             //Question 5: Program to remove multiple spaces from a string
 
             //string s;
-            //Console.Write("Enter a string : ");
+            //Console.WriteLine("Enter a string : ");
             //s = Console.ReadLine();
 
             //s = s.Trim();
