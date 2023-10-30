@@ -100,7 +100,7 @@ namespace Assignment2
                 }
                 else
                 {
-                    result += s[i];
+                    result.Append(s[i]);
                 }
             }
             Console.WriteLine(result);
