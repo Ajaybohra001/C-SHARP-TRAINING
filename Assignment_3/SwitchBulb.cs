@@ -10,27 +10,22 @@ namespace Assignment3
     {
         static int SwitchAction(int[] array)
         {
-            int cnt = 0;
+            int switchCount = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == 0)
+                int currentState = array[i];
+                if (switchCount % 2 == 1)
                 {
-                    array[i] = 1;
-                    for (int j = i + 1; j < array.Length; j++)
-                    {
-                        if (array[j] == 0)
-                        {
-                            array[j] = 1;
-                        }
-                        else
-                        {
-                            array[j] = 0;
-                        }
-                    }
-                    cnt++;
+                    currentState = array[i] == 0 ? 1 : 0;
+
+                }
+                if (currentState == 0)
+                {
+                    switchCount++;
                 }
             }
-            return cnt;
+
+            return switchCount;
         }
 
         public static void CountSwitchAction()
@@ -48,7 +43,7 @@ namespace Assignment3
                 Console.WriteLine("Enter the size of Array : ");
                 var n = Console.ReadLine();
                 bool successive = int.TryParse(n, out num);
-                if (num < 0)
+                if (num <= 0)
                 {
                     Console.WriteLine("Enter the valid input");
                     continue;

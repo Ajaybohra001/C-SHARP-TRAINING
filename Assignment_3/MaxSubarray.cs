@@ -38,7 +38,7 @@ namespace Assignment3
                 Console.WriteLine("Enter the size of Array : ");
                 var n = Console.ReadLine();
                 bool successive = int.TryParse(n, out num);
-                if (num < 0)
+                if (num <= 0)
                 {
                     Console.WriteLine("Enter the valid input");
                     continue;
