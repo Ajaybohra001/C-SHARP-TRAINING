@@ -13,7 +13,9 @@ namespace Assignment4
         public string studCode { get; set; }
         public string studCourses { get; set; }
 
-        private List<Course> _courses;
+        private static  List<Course> _courses = new List<Course>();
+       // public static List<Student>_studentList = new List<Student>();
+
         public Student()
         {
             Course c = new Course();
@@ -24,21 +26,69 @@ namespace Assignment4
             _courses.Add(c);
         }
 
-
-        public List<Course> courses
+        public static  List<Course> courses
         {
             get { return _courses; }
 
         }
 
-        public void AddCourse(Course cour)
+        public void AddCourse(Course course)
         {
-            _courses.Add(cour);
+            string id = "";
+            int final_id = 0;
+            Console.WriteLine("Enter the Course id");
+            id = Console.ReadLine();
+            while (id.Length == 0)
+            {
+                Console.WriteLine("Invalid input,Please enter again");
+                id = Console.ReadLine();
+            }
+            while (!int.TryParse(id, out final_id))
+            {
+                Console.WriteLine("Invalid input,Please enter again");
+                id = Console.ReadLine();
+            }
+            course.courseId = final_id;
+
+            string name = "";
+            Console.WriteLine("Enter Course Name");
+            name = Console.ReadLine();
+            while (name.Length == 0)
+            {
+                Console.WriteLine("Invalid input,Please enter again");
+                name = Console.ReadLine();
+            }
+            course.courseName = name;
+
+            string code = "";
+            Console.WriteLine("Enter Course Code");
+            code = Console.ReadLine();
+            while (code.Length == 0)
+            {
+                Console.WriteLine("Invalid input,Please enter again");
+                code = Console.ReadLine();
+            }
+            course.courseCode = code;
+
+            
+
+            string subject = "";
+            Console.WriteLine("Enter Course Subject Name");
+            subject = Console.ReadLine();
+            while (subject.Length == 0)
+            {
+                Console.WriteLine("Invalid input,Please enter again");
+                name = Console.ReadLine();
+            }
+            course.courseSubject = subject;
+
+
+            _courses.Add(course);
         }
 
-        public void RemoveCourse(Course cour)
+        public void RemoveCourse(Course course)
         {
-            _courses.Remove(cour);
+            _courses.Remove(course);
         }
 
         public void AddCourse(List<Course> cour)
