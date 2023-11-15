@@ -20,6 +20,7 @@ namespace Assignment4
 
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("1.Add Subject");
                 Console.WriteLine("2.Add Course");
                 Console.WriteLine("3. Add Student");
@@ -39,6 +40,7 @@ namespace Assignment4
                 {
                     Console.WriteLine("Enter the choice ");
                     var c = Console.ReadLine();
+                    Console.WriteLine();
                     bool successive = int.TryParse(c, out choice);
                     if (!successive)
                     {
@@ -170,11 +172,11 @@ namespace Assignment4
                         course.AddRange(Student.courses);
                         Console.WriteLine("Enter the name or code of the course to find:");
                         string searchTerm1 = Console.ReadLine();
-                        var foundCourses1 = course.FindAll(co => co.courseName.Contains(searchTerm1) || co.courseCode.Contains(searchTerm1));
-                        if (foundCourses1.Count > 0)
+                        var foundCourses = course.FindAll(co => co.courseName.Contains(searchTerm1) || co.courseCode.Contains(searchTerm1));
+                        if (foundCourses.Count > 0)
                         {
                             Console.WriteLine("Matching Courses:");
-                            foreach (var c1 in foundCourses1)
+                            foreach (var c1 in foundCourses)
                             {
                                 Console.WriteLine($"Id: {c1.courseId}, Name: {c1.courseName}, Code: {c1.courseCode}");
                             }
@@ -184,6 +186,26 @@ namespace Assignment4
                             Console.WriteLine("No courses found matching the search term.");
                         }
                         break;
+
+                    case 9:
+                        Console.WriteLine("Enter the name or code of the course to find:");
+                        string searchTerm2 = Console.ReadLine();
+                        var foundStudent = _studentList.FindAll(st => st.studName.Contains(searchTerm2) || st.studCode.Contains(searchTerm2));
+                        if (foundStudent.Count > 0)
+                        {
+                            Console.WriteLine("Matching Courses:");
+                            foreach (var i in foundStudent)
+                            {
+                                Console.WriteLine($"Id: {i.studId}, Name: {i.studName}, Code: {i.studCode}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No courses found matching the search term.");
+                        }
+                        break;
+
+
 
 
                     case 10:
