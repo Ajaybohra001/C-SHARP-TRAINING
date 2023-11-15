@@ -188,7 +188,7 @@ namespace Assignment4
                         break;
 
                     case 9:
-                        Console.WriteLine("Enter the name or code of the course to find:");
+                        Console.WriteLine("Enter the name or code of the student to find:");
                         string searchTerm2 = Console.ReadLine();
                         var foundStudent = _studentList.FindAll(st => st.studName.Contains(searchTerm2) || st.studCode.Contains(searchTerm2));
                         if (foundStudent.Count > 0)
