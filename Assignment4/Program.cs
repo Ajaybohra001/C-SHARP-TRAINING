@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +11,9 @@ namespace Assignment4
 
         static void Main(string[] args)
         {
-         List<Student> _studentList = new List<Student>();
+            List<Student> _studentList = new List<Student>();
 
-        int choice = -1;
+            int choice = -1;
             bool ch = true;
             //Student stud = new Student();
 
@@ -30,7 +30,7 @@ namespace Assignment4
                 Console.WriteLine("7.Find Subject by Name/Code");
                 Console.WriteLine("8.Find Course by Name/Code");
                 Console.WriteLine("9.Find Student by Name/Code");
-     
+
                 Console.WriteLine("10.Exit");
                 Console.WriteLine();
 
@@ -59,24 +59,38 @@ namespace Assignment4
                         {
                             CourseSubject cs = new CourseSubject();
                             c.AddSubject(cs);
-                            Console.WriteLine("Do you want to add more subject?");
-                            Console.WriteLine("Yes(Y/y) or No(N/n) ? ");
 
-                            string str = Console.ReadLine();
-                            if ((str.Equals("N") || str.Equals("n")))
+                            
+
+                            here:
+                            Console.WriteLine("Do you want to add more subject?");
+                          
+                            Console.WriteLine("Yes(Y/y) or No(N/n) ? ");
+                           
+
+                            string input = Console.ReadLine();
+                            if (input.Equals("Y") || input.Equals( "y"))
+                                continue;
+
+                          else if ((input.Equals("N") || input.Equals("n")))
                             {
                                 temp = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Input !");
+                                goto here;
                             }
                         }
                         Console.WriteLine("Subject added.");
                         break;
 
 
-                    
+
                     case 2:
                         bool temp1 = false;
                         Student s = new Student();
-                        while(!temp1)
+                        while (!temp1)
                         {
                             Course c1 = new Course();
                             s.AddCourse(c1);
@@ -93,7 +107,7 @@ namespace Assignment4
 
                         }
 
-                        
+
 
                         break;
 
@@ -120,10 +134,10 @@ namespace Assignment4
                         break;
 
                     case 4:
-                        
-                        
+
+
                         Console.WriteLine("List of all subjects:");
-                        foreach (var i in Course.subjects) 
+                        foreach (var i in Course.subjects)
                         {
                             Console.WriteLine("Subject id: {0} \n Subject name: {1} \n Subject code: {2} ", i.csId, i.csName, i.csCode);
                         }
@@ -131,7 +145,7 @@ namespace Assignment4
 
                     case 5:
                         Console.WriteLine("List of all Courses : ");
-                        foreach(var i in Student.courses )
+                        foreach (var i in Student.courses)
                         {
                             Console.WriteLine("Course id : {0} \n Course Name : {1} \n Course Code : {2} \n Course subject : {3}", i.courseId, i.courseName, i.courseCode, i.courseSubject, i.courseSubject);
 
@@ -141,16 +155,16 @@ namespace Assignment4
                         Console.WriteLine("List of all Students : ");
                         foreach (var i in _studentList)
                         {
-                            Console.WriteLine("Student id : {0} \n Student Name : {1} \n Student Code : {2} \n student course : {3}",i.studId, i.studName, i.studCode, i.studCourses);
+                            Console.WriteLine("Student id : {0} \n Student Name : {1} \n Student Code : {2} \n student course : {3}", i.studId, i.studName, i.studCode, i.studCourses);
 
                         }
                         break;
                     case 7:
-                        
-                         List<CourseSubject> subjects= new List<CourseSubject>();
+
+                        List<CourseSubject> subjects = new List<CourseSubject>();
                         subjects.AddRange(Course.subjects);
 
-                         Console.WriteLine("Enter the name or code of the subject to find:");
+                        Console.WriteLine("Enter the name or code of the subject to find:");
                         string searchTerm = Console.ReadLine();
                         var foundSubjects = subjects.FindAll(sub => sub.csName.Contains(searchTerm) || sub.csCode.Contains(searchTerm));
                         if (foundSubjects.Count > 0)
