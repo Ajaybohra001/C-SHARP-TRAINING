@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +13,8 @@ namespace Assignment4
         public string studCode { get; set; }
         public string studCourses { get; set; }
 
-        private static  List<Course> _courses = new List<Course>();
-       // public static List<Student>_studentList = new List<Student>();
+        private static List<Course> _courses = new List<Course>();
+        // public static List<Student>_studentList = new List<Student>();
 
         public Student()
         {
@@ -26,7 +26,7 @@ namespace Assignment4
             _courses.Add(c);
         }
 
-        public static  List<Course> courses
+        public static List<Course> courses
         {
             get { return _courses; }
 
@@ -34,28 +34,36 @@ namespace Assignment4
 
         public void AddCourse(Course course)
         {
-            string id = "";
-            int final_id = 0;
-            Console.WriteLine("Enter the Course id");
-            id = Console.ReadLine();
-            while (id.Length == 0)
+            
+            bool ch = true;
+            int id = -1 ;
+
+            while (ch)
             {
-                Console.WriteLine("Invalid input,Please enter again");
-                id = Console.ReadLine();
+                Console.WriteLine("Enter the Course id");
+                var testId = Console.ReadLine();
+
+                bool successive = int.TryParse(testId, out id);
+                if (!successive)
+                {
+                    Console.WriteLine("Please enter the valid input.");
+                    
+                }
+                else
+                {
+                    ch = false;
+                }
+                
+
             }
-            while (!int.TryParse(id, out final_id))
-            {
-                Console.WriteLine("Invalid input,Please enter again");
-                id = Console.ReadLine();
-            }
-            course.courseId = final_id;
+            course.courseId =id;
 
             string name = "";
             Console.WriteLine("Enter Course Name");
             name = Console.ReadLine();
             while (name.Length == 0)
             {
-                Console.WriteLine("Invalid input,Please enter again");
+                Console.WriteLine("Please enter the valid input.");
                 name = Console.ReadLine();
             }
             course.courseName = name;
@@ -70,14 +78,14 @@ namespace Assignment4
             }
             course.courseCode = code;
 
-            
+
 
             string subject = "";
             Console.WriteLine("Enter Course Subject Name");
             subject = Console.ReadLine();
             while (subject.Length == 0)
             {
-                Console.WriteLine("Invalid input,Please enter again");
+                Console.WriteLine("Please enter the valid input.");
                 name = Console.ReadLine();
             }
             course.courseSubject = subject;
