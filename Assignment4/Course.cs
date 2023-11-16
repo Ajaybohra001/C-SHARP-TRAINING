@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Assignment4
 {
-    class Course :CourseSubject
+    class Course : CourseSubject
     {
         public int courseId { get; set; }
         public string courseName { get; set; }
         public string courseCode { get; set; }
         public string courseSubject { get; set; }
 
-        private static List<CourseSubject> _subjects= new List<CourseSubject>();
+        private static List<CourseSubject> _subjects = new List<CourseSubject>();
         public Course()
         {
             CourseSubject c = new CourseSubject();
@@ -32,32 +32,30 @@ namespace Assignment4
 
         public void AddSubject(CourseSubject subject)
         {
-            string id = "";
-            int final_id = 0;
-            Console.WriteLine("Enter Subject id");
-            id = Console.ReadLine();
-            while (id.Length == 0)
-            {
-                Console.WriteLine("Invalid input,Please enter again");
-                id = Console.ReadLine();
-            }
-            while (!int.TryParse(id, out final_id))
-            {
-                Console.WriteLine("Invalid input,Please enter again");
-                id = Console.ReadLine();
-            }
-            subject.csId = final_id;
+            bool ch = true;
+            int id = -1;
 
-            string code = "";
-            Console.WriteLine("Enter Subject Code");
-            code = Console.ReadLine();
-            while (code.Length == 0)
+            while (ch)
             {
-                Console.WriteLine("Invalid input,Please enter again");
-                code = Console.ReadLine();
-            }
-            subject.csCode = code;
+                Console.WriteLine("Enter the Subject id.");
+                var testId = Console.ReadLine();
 
+                bool successive = int.TryParse(testId, out id);
+                if (!successive)
+                {
+                    Console.WriteLine("Please enter the valid input.");
+
+                }
+                else
+                {
+                    ch = false;
+                }
+
+
+            }
+            subject.csId = id;
+
+           
             string name = "";
             Console.WriteLine("Enter Subject Name");
             name = Console.ReadLine();
@@ -67,8 +65,19 @@ namespace Assignment4
                 name = Console.ReadLine();
             }
             subject.csName = name;
-            
+
             _subjects.Add(subject);
+
+            string code = "";
+            Console.WriteLine("Enter Subject Code.");
+            code = Console.ReadLine();
+            while (code.Length == 0)
+            {
+                Console.WriteLine("Please enter the valid input.");
+                code = Console.ReadLine();
+            }
+            subject.csCode = code;
+
         }
 
         public void RemoveSubject(CourseSubject subject)
@@ -81,7 +90,7 @@ namespace Assignment4
             _subjects.AddRange(subject);
         }
 
-        
-        
+
+
     }
 }
