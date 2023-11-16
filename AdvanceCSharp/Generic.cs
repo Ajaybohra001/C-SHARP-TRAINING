@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAY2
 {
+
     //Base Class generic constraint
     public class BaseClass
     {
