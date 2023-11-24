@@ -1,0 +1,34 @@
+Problem Statements
+1) Create following classess: 
+CourseSubject: add public properties Id, Name, Code
+Course: add public properties Id, Name, Code, Subjects
+Student: add public properties Id, Name, Code, Courses
+
+1) For the Course class, add the following:
+1.1) A private field "_subjects" of type List to store the list of subjects for the course.
+1.2) Expose a public property Subjects with only a getter that returns this "_subjects" list.
+1.3) AddSubject method which accepts CourseSubject as a parameter which returns none. 
+1.4) It should add the subject to the subjects list.
+1.5) RemoveSubject method which accepts CourseSubject as a parameter which returns none. 
+1.6) It should remove the course subject from the subjects list.
+1.7) For the Course class, add an overloaded AddSubject() method that accepts a list of CourseSubjects and adds them to the "subjects" collection.
+
+2) For the Student class, add the following:
+2.1) A private field "_courses" of type list to store the list of course .
+2.2) Expose a public properties Courses with only getter that returns this "_courses" list
+2.3) Similarly 1.3 to 1.7 repeat the process for course
+AddCourse, RemoveCourse, overload method
+
+3) There is mandatory course for each student to be assigned to student by default
+4) There is a mandatory subject for each course to be added by default
+OPTIONS
+1. Add Subject
+2. Add Course
+3. Add Student
+4. View All Subjects
+5. View All Courses
+6. View All Students
+7. Find Subject by Name/Code
+8. Find Course by Name/Code
+9. Find Student by Name/Code
+10. exit
