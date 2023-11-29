@@ -30,61 +30,61 @@ namespace StandardQueryOperators
 
             //Count
             
-            Console.WriteLine("Count of number : " + number.Count());
-            Console.WriteLine();
+            //Console.WriteLine("Count of number : " + number.Count());
+            //Console.WriteLine();
 
             //Max
-            Console.WriteLine("Maximum number : " + number.Max());
-            Console.WriteLine();
+            //Console.WriteLine("Maximum number : " + number.Max());
+            //Console.WriteLine();
 
             //Max
-            Console.WriteLine("Minimum number : " + number.Min());
-            Console.WriteLine();
+            //Console.WriteLine("Minimum number : " + number.Min());
+            //Console.WriteLine();
 
             //Average
-            Console.WriteLine("Average of number : " + number.Average());
-            Console.WriteLine();
+            //Console.WriteLine("Average of number : " + number.Average());
+            //Console.WriteLine();
 
             //Sum
-            Console.WriteLine("Sum of number : " + number.Sum());
+            //Console.WriteLine("Sum of number : " + number.Sum());
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
 
             //Where
-            Console.WriteLine("Where example : ");
-            Console.WriteLine();
+            //Console.WriteLine("Where example : ");
+            //Console.WriteLine();
 
 
-            var num =number.Where(n => n > 5);
+            //var num =number.Where(n => n > 5);
 
-            foreach(var i in num)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine();
+            //foreach(var i in num)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine();
 
             //OfType
-            Console.WriteLine("OfType example : ");
-            Console.WriteLine();
+            //Console.WriteLine("OfType example : ");
+            //Console.WriteLine();
 
-            var type = arrayList.OfType<string>();
-            foreach (var i in type)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine();
+            //var type = arrayList.OfType<string>();
+            //foreach (var i in type)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine();
 
             //OrderBy
-            Console.WriteLine("OrderBy example : ");
-            Console.WriteLine();
+            //Console.WriteLine("OrderBy example : ");
+            //Console.WriteLine();
 
-            var orderBy = number.OrderBy(s=> s);
-            foreach (var i in orderBy)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine();
+            //var orderBy = number.OrderBy(s=> s);
+            //foreach (var i in orderBy)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine();
 
 
             // Student collection
@@ -99,108 +99,151 @@ namespace StandardQueryOperators
 
             };
 
-            var studentsInAscOrder = studentList.OrderBy(s => s.StudentName);
+            //var studentsInAscOrder = studentList.OrderBy(s => s.StudentName);
 
-            var studentsInDescOrder = studentList.OrderByDescending(s => s.StudentName);
+            //var studentsInDescOrder = studentList.OrderByDescending(s => s.StudentName);
 
 
-            Console.WriteLine("Ascending Order:");
+            //Console.WriteLine("Ascending Order:");
 
-            foreach (var std in studentsInAscOrder)
-                Console.WriteLine(std.StudentName);
-            Console.WriteLine();
+            //foreach (var std in studentsInAscOrder)
+            //    Console.WriteLine(std.StudentName);
+            //Console.WriteLine();
 
-            Console.WriteLine("Descending Order:");
+            //Console.WriteLine("Descending Order:");
 
-            foreach (var std in studentsInDescOrder)
-                Console.WriteLine(std.StudentName);
-            Console.WriteLine();
+            //foreach (var std in studentsInDescOrder)
+            //    Console.WriteLine(std.StudentName);
+            //Console.WriteLine();
 
 
             //ThenBy
-            Console.WriteLine("ThenBy example : ");
+            //Console.WriteLine("ThenBy example : ");
 
-            var studThenBy = studentList.OrderBy(s => s.StudentName).ThenBy(s => s.Age);
-            foreach (var std in studThenBy)
-                Console.WriteLine(std.StudentName);
-            Console.WriteLine();
+            //var studThenBy = studentList.OrderBy(s => s.StudentName).ThenBy(s => s.Age);
+            //foreach (var std in studThenBy)
+            //    Console.WriteLine(std.StudentName);
+            //Console.WriteLine();
 
             //ThenByDesc
-            Console.WriteLine("ThenByDescending example : ");
-            var studThenByDes = studentList.OrderBy(s => s.StudentName).ThenByDescending(s => s.Age);
-            foreach (var std in studThenBy)
-                Console.WriteLine(std.StudentName);
-            Console.WriteLine();
+            //Console.WriteLine("ThenByDescending example : ");
+            //var studThenByDes = studentList.OrderBy(s => s.StudentName).ThenByDescending(s => s.Age);
+            //foreach (var std in studThenBy)
+            //    Console.WriteLine(std.StudentName);
+            //Console.WriteLine();
 
             //Contains
-            Console.WriteLine("Contains example : ");
-            bool check = number.Contains(10);
+            //Console.WriteLine("Contains example : ");
+            //bool check = number.Contains(10);
 
-            Console.WriteLine(check);
+            //Console.WriteLine(check);
 
             //First and FirstOrDefault
 
-            List<int> intList = new List<int>() { 7, 10, 21, 30, 45, 50, 87 };
-            List<string> strList = new List<string>() { null, "Two", "Three", "Four", "Five" };
-            List<string> emptyList = new List<string>();
+            //List<int> intList = new List<int>() { 7, 10, 21, 30, 45, 50, 87 };
+            //List<string> strList = new List<string>() { null, "Two", "Three", "Four", "Five" };
+            //List<string> emptyList = new List<string>();
 
-            Console.WriteLine("1st Element in intList: {0}", intList.First());
-            Console.WriteLine("1st Even Element in intList: {0}", intList.First(i => i % 2 == 0));
+            //Console.WriteLine("1st Element in intList: {0}", intList.First());
+            //Console.WriteLine("1st Even Element in intList: {0}", intList.First(i => i % 2 == 0));
 
-            Console.WriteLine("1st Element in strList: {0}", strList.First());
+            //Console.WriteLine("1st Element in strList: {0}", strList.First());
 
 
-            Console.WriteLine("Default value : " + emptyList.FirstOrDefault());
+            //Console.WriteLine("Default value : " + emptyList.FirstOrDefault());
 
             //Last and LastOrDefault
 
-            Console.WriteLine("1st Element in intList: {0}", intList.LastOrDefault(i=> i==37));
-            Console.WriteLine("1st Even Element in intList: {0}", intList.Last(i => i % 2 == 0));
+            //Console.WriteLine("1st Element in intList: {0}", intList.LastOrDefault(i=> i==37));
+            //Console.WriteLine("1st Even Element in intList: {0}", intList.Last(i => i % 2 == 0));
 
-            Console.WriteLine("1st Element in strList: {0}", strList.Last());
+            //Console.WriteLine("1st Element in strList: {0}", strList.Last());
 
 
-            Console.WriteLine("Default value : " + emptyList.LastOrDefault());
+            //Console.WriteLine("Default value : " + emptyList.LastOrDefault());
 
             //Single and SingleOrDefault
 
-            List<int> singleElementList = new List<int>() { 12 };
-           Console.WriteLine("Single Element : " + singleElementList.Single());
+            // List<int> singleElementList = new List<int>() { 12 };
+            //Console.WriteLine("Single Element : " + singleElementList.Single());
 
-            Console.WriteLine("SingleOrDefault Element " + singleElementList.SingleOrDefault());
+            // Console.WriteLine("SingleOrDefault Element " + singleElementList.SingleOrDefault());
 
             //Skip and SkipWhile
-            var skpList = intList.Skip(2);
+            // var skpList = intList.Skip(2);
 
-            foreach(var i in skpList)
-            {
-                Console.WriteLine(i);
-            }
+            //foreach(var i in skpList)
+            //{
+            //    Console.WriteLine(i);
+            //}
 
-            Console.WriteLine("Skip while list ");
-            var skpWhileList = intList.SkipWhile(i => i < 10);
+            //Console.WriteLine("Skip while list ");
+            //var skpWhileList = intList.SkipWhile(i => i < 10);
 
-            foreach(var i in skpWhileList)
-            {
-                Console.WriteLine(i);
-            }
+            //foreach(var i in skpWhileList)
+            //{
+            //    Console.WriteLine(i);
+            //}
 
-            Console.WriteLine();
+            // Console.WriteLine();
 
             //Take and TakeWhile
 
-            var takeList = intList.Take(4);
+            //var takeList = intList.Take(4);
 
-            foreach (var i in takeList)
-                Console.WriteLine("Top four element of integer list : " + i);
+            //foreach (var i in takeList)
+            //    Console.WriteLine("Top four element of integer list : " + i);
 
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            var takeWhileList = intList.TakeWhile(n => n < 20);
+            //var takeWhileList = intList.TakeWhile(n => n < 20);
 
-            foreach (var i in takeWhileList)
-                Console.WriteLine( i);
+            //foreach (var i in takeWhileList)
+            //    Console.WriteLine( i);
+
+            //SELECT 
+
+            //var result = studentList.Select(s => s.StudentName);
+            //foreach (var i in result)
+            //    Console.WriteLine(i);
+            //Console.WriteLine();
+
+            //All
+
+            //bool studentAge = studentList.All(s => s.Age > 13 && s.Age < 19);
+            //Console.WriteLine("The age of student is between 13 and 19 : " + studentAge);
+
+            //Any
+            //bool checkAny = studentList.Any(s => s.Age > 13 && s.Age < 20);
+            //Console.WriteLine("Check the age is bw 13 and 20 : {0}", checkAny);
+
+            //Concat
+
+            //List<int> integer1List = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
+            //List<int> integer2List = new List<int>() { 8,9,10 };
+
+            //var concatList = integer1List.Concat(integer2List);
+
+            //foreach(var i in concatList)
+            //{
+            //    Console.WriteLine(i);
+            //}
+
+            //Distinct
+
+            List<int> duplicateList = new List<int>() { 1, 2, 3, 2, 4, 3, 5, 6, 6 };
+            var distinctList = duplicateList.Distinct();
+
+            foreach (var i in distinctList)
+            {
+                Console.WriteLine(i);
+            }
+
+
+
+
+
 
 
 
