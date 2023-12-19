@@ -26,13 +26,13 @@ namespace FirstWebApi.Controllers
             {
                 return BadRequest();
             }
-            var studnet = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
-            if (studnet == null)
+            var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return Ok(studnet);
+            return Ok(student);
         }
 
         [HttpPost]
@@ -48,11 +48,50 @@ namespace FirstWebApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+
+            if(student.studentAge<18)
+            {
+                ModelState.AddModelError("Not Accepted", "Under Age");
+                return BadRequest(ModelState);
+            }
             student.studentId = StudentStore.studentList.OrderByDescending(x => x.studentId).FirstOrDefault().studentId + 1;
             StudentStore.studentList.Add(student);
 
             return CreatedAtRoute("GetStudent", new { id = student.studentId }, student);
 
+
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<Student> DeleteStudent(int id)
+        {
+            var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
+            if (student == null)
+            {
+                return NotFound(student);
+            }
+            StudentStore.studentList.Remove(student);
+            return Ok(student);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult UpdateStudent(int id, [FromBody] Student updatedStudent)
+        {
+            var existingStudent = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+
+            if (existingStudent == null)
+            {
+                return NotFound();
+            }
+
+            existingStudent.studentId = updatedStudent.studentId;
+            existingStudent.studentName = updatedStudent.studentName;
+             
+            return Ok(existingStudent);
         }
     }
 }
