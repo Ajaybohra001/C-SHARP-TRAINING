@@ -1,4 +1,7 @@
 
+using FirstWebApi.Models;
+using FluentValidation.AspNetCore;
+
 namespace FirstWebApi
 {
     public class Program
@@ -10,6 +13,9 @@ namespace FirstWebApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+                   builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Student>());
+
+
             
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,6 +30,7 @@ namespace FirstWebApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+           
 
             app.UseHttpsRedirection();
 
