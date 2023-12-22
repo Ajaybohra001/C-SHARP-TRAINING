@@ -1,4 +1,5 @@
 ﻿using FirstWebApi.Data;
+using FirstWebApi.Logger;
 using FirstWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -11,6 +12,15 @@ namespace FirstWebApi.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        private readonly StudentStore _studentStore;
+        private readonly IMyLogger _myLogger;
+
+        public StudentController(StudentStore, IMyLogger myLogger)
+        {
+            this._studentStore = StudentStore   ;
+            _myLogger = myLogger;
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Student>> GetStudentList()
@@ -26,6 +36,7 @@ namespace FirstWebApi.Controllers
         {
             if (id == 0)
             {
+                _myLogger.Log("Id is invalid for this id");
                 return BadRequest();
             }
             var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
