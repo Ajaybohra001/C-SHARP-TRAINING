@@ -1,11 +1,13 @@
 ﻿using FirstWebApi.Data;
 using FirstWebApi.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FirstWebApi.Controllers
 {
-    [Route("api/StudentControlle")]
+    [Route("api/StudentController")]
     [ApiController]
     public class StudentController : ControllerBase
     {
@@ -16,7 +18,7 @@ namespace FirstWebApi.Controllers
             return Ok(StudentStore.studentList);
         }
 
-        [HttpGet("id:int", Name = "GetStudent")]
+        [HttpGet("id:int", Name = "GetStudentList")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -36,6 +38,7 @@ namespace FirstWebApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<Student> CreateStudent([FromBody] Student student)
@@ -44,25 +47,21 @@ namespace FirstWebApi.Controllers
             {
                 return BadRequest(student);
             }
-            if (student.studentId > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
 
-            if(student.studentAge<18)
+
+            if (student.studentAge < 18)
             {
                 ModelState.AddModelError("Not Accepted", "Under Age");
                 return BadRequest(ModelState);
             }
-            student.studentId = StudentStore.studentList.OrderByDescending(x => x.studentId).FirstOrDefault().studentId + 1;
+            //student.studentId = StudentStore.studentList.OrderByDescending(x => x.studentId).FirstOrDefault().studentId + 1;
             StudentStore.studentList.Add(student);
 
-            return CreatedAtRoute("GetStudent", new { id = student.studentId }, student);
-
+            return CreatedAtRoute("GetStudentList", new { id = student.studentId }, student);
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Student> DeleteStudent(int id)
@@ -81,6 +80,10 @@ namespace FirstWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult UpdateStudent(int id, [FromBody] Student updatedStudent)
         {
+            if(id==0 || updatedStudent==null)
+            {
+                return BadRequest();
+            }
             var existingStudent = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
 
             if (existingStudent == null)
@@ -93,5 +96,31 @@ namespace FirstWebApi.Controllers
              
             return Ok(existingStudent);
         }
+        [HttpPatch("id:int", Name = "PartialUpdate")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public IActionResult PartialUpdateStudent(int id, JsonPatchDocument<Student> patchStudent)
+        {
+            if (id == 0 || patchStudent == null)
+            {
+                return BadRequest();
+            }
+            var partialUpdate = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+            if (partialUpdate == null)
+                return BadRequest();
+
+            patchStudent.ApplyTo(partialUpdate, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+
+            }
+
+            return NoContent();
+        
+        }
+
     }
 }
