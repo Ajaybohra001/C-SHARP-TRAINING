@@ -1,6 +1,7 @@
 ﻿namespace FirstWebApi.Logger
 {
-    public class IMyLogger
+    public interface IMyLogger
     {
+      public   void Log(string message,string type);
     }
 }

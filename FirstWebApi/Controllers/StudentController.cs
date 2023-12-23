@@ -13,30 +13,42 @@ namespace FirstWebApi.Controllers
     public class StudentController : ControllerBase
     {
         private readonly StudentStore _studentStore;
-        private readonly IMyLogger _myLogger;
 
-        public StudentController(StudentStore, IMyLogger myLogger)
+        //private readonly ILogger<StudentController> _logger;
+
+        //public StudentController(ILogger<StudentController> logger)
+        //{
+        //  _logger=logger;
+        //}
+
+        //Creating a custom logger
+        private readonly IMyLogger _myLogger;
+        public StudentController(IMyLogger logger)
         {
-            this._studentStore = StudentStore   ;
-            _myLogger = myLogger;
+            _myLogger = logger;
+            
         }
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Student>> GetStudentList()
         {
+            //_logger.LogInformation("Get all students.");
+            _myLogger.Log("Get all the students","");
             return Ok(StudentStore.studentList);
         }
 
         [HttpGet("id:int", Name = "GetStudentList")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Student> GetStudentList(int id)
         {
             if (id == 0)
             {
-                _myLogger.Log("Id is invalid for this id");
+                _myLogger.Log("id is not invalid." + id,"error");
                 return BadRequest();
             }
             var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
@@ -54,8 +66,15 @@ namespace FirstWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<Student> CreateStudent([FromBody] Student student)
         {
+            if(student.studentId<=0)
+            {
+                _myLogger.Log("Id is not Valid", "error");
+                return BadRequest("Id is not Valid");
+            }
             if (student == null)
             {
+                //_logger.LogInformation("Student is null");
+                _myLogger.Log("Id should not be null", "error");
                 return BadRequest(student);
             }
 
