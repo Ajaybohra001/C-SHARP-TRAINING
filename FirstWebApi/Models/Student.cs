@@ -1,13 +1,17 @@
 ﻿using FirstWebApi.Validator;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FirstWebApi.Models
 {
     public class Student
     {
 
-      //  [ValidateNever] 
+        //  [ValidateNever] 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int studentId { get; set; }
 
        // [Required(ErrorMessage = "Please enter name")]

@@ -1,7 +1,9 @@
 
+using FirstWebApi.Data;
 using FirstWebApi.Logger;
 using FirstWebApi.Models;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace FirstWebApi
@@ -17,9 +19,13 @@ namespace FirstWebApi
                     .WriteTo.File("log/student.txt", rollingInterval: RollingInterval.Day).CreateLogger();
             builder.Host.UseSerilog().UseSerilog();
             builder.Services.AddControllers();
-                   builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Student>());
+            builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Student>());
 
-
+            builder.Services.AddDbContext<StudentDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            }
+            );
             
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

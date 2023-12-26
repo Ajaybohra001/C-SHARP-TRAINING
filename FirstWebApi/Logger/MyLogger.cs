@@ -7,7 +7,7 @@
         {
             if(type=="error")
             {
-                Console.WriteLine("Error -"+ message);
+                Console.WriteLine("Error -" + message);
             }
             else
             {

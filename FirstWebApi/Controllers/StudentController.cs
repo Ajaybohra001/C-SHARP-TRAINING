@@ -12,7 +12,14 @@ namespace FirstWebApi.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly StudentStore _studentStore;
+       // private readonly StudentStore _studentStore;
+
+        //Adding DbContext
+        private readonly StudentDbContext _db;
+        public StudentController(StudentDbContext db)
+        {
+            _db = db;
+        }
 
         //private readonly ILogger<StudentController> _logger;
 
@@ -22,12 +29,12 @@ namespace FirstWebApi.Controllers
         //}
 
         //Creating a custom logger
-        private readonly IMyLogger _myLogger;
-        public StudentController(IMyLogger logger)
-        {
-            _myLogger = logger;
+        //private readonly IMyLogger _myLogger;
+        //public StudentController(IMyLogger logger)
+        //{
+        //    _myLogger = logger;
             
-        }
+        //}
 
 
         [HttpGet]
@@ -35,8 +42,8 @@ namespace FirstWebApi.Controllers
         public ActionResult<IEnumerable<Student>> GetStudentList()
         {
             //_logger.LogInformation("Get all students.");
-            _myLogger.Log("Get all the students","");
-            return Ok(StudentStore.studentList);
+            //_myLogger.Log("Get all the students","");
+            return Ok(_db.Students.ToList());
         }
 
         [HttpGet("id:int", Name = "GetStudentList")]
@@ -48,10 +55,10 @@ namespace FirstWebApi.Controllers
         {
             if (id == 0)
             {
-                _myLogger.Log("id is not invalid." + id,"error");
+               // _myLogger.Log("id is not invalid." + id,"error");
                 return BadRequest();
             }
-            var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
+            var student = _db.Students.FirstOrDefault(x => x.studentId == id);
             if (student == null)
             {
                 return NotFound();
@@ -68,13 +75,13 @@ namespace FirstWebApi.Controllers
         {
             if(student.studentId<=0)
             {
-                _myLogger.Log("Id is not Valid", "error");
+               // _myLogger.Log("Id is not Valid", "error");
                 return BadRequest("Id is not Valid");
             }
             if (student == null)
             {
                 //_logger.LogInformation("Student is null");
-                _myLogger.Log("Id should not be null", "error");
+              //  _myLogger.Log("Id should not be null", "error");
                 return BadRequest(student);
             }
 
@@ -85,7 +92,10 @@ namespace FirstWebApi.Controllers
                 return BadRequest(ModelState);
             }
             //student.studentId = StudentStore.studentList.OrderByDescending(x => x.studentId).FirstOrDefault().studentId + 1;
-            StudentStore.studentList.Add(student);
+           // StudentStore.studentList.Add(student);
+
+            _db.Add(student);
+            _db.SaveChanges();
 
             return CreatedAtRoute("GetStudentList", new { id = student.studentId }, student);
 
@@ -96,12 +106,17 @@ namespace FirstWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Student> DeleteStudent(int id)
         {
-            var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
+           // var student = StudentStore.studentList.FirstOrDefault(x => x.studentId == id);
+
+            var student =_db.Students.FirstOrDefault(s=>s.studentId==id);
+
             if (student == null)
             {
                 return NotFound(student);
             }
-            StudentStore.studentList.Remove(student);
+            //StudentStore.studentList.Remove(student);
+            _db.Remove(student);
+            _db.SaveChanges();
             return Ok(student);
         }
 
@@ -114,15 +129,20 @@ namespace FirstWebApi.Controllers
             {
                 return BadRequest();
             }
-            var existingStudent = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+            // var existingStudent = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+
+             var existingStudent = _db.Students.FirstOrDefault(s => s.studentId == id);
+
 
             if (existingStudent == null)
             {
                 return NotFound();
             }
 
-            existingStudent.studentId = updatedStudent.studentId;
-            existingStudent.studentName = updatedStudent.studentName;
+           // existingStudent.studentId = updatedStudent.studentId;
+            //existingStudent.studentName = updatedStudent.studentName;
+            _db.Update(existingStudent);
+            _db.SaveChanges();
              
             return Ok(existingStudent);
         }
@@ -137,11 +157,19 @@ namespace FirstWebApi.Controllers
             {
                 return BadRequest();
             }
-            var partialUpdate = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+            // var partialUpdate = StudentStore.studentList.FirstOrDefault(s => s.studentId == id);
+
+            var partialUpdate = _db.Students.FirstOrDefault(s => s.studentId == id);
+
             if (partialUpdate == null)
                 return BadRequest();
-
-            patchStudent.ApplyTo(partialUpdate, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
+            //Student student = new()
+            //{
+            //    studentId = student.studentId,
+            //    studentName = student.studentName,
+            //    studentAge = student.studentAge
+            //};
+            //patchStudent.ApplyTo(student, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
             if (!ModelState.IsValid)
             {
                 return BadRequest();
