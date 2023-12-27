@@ -1,0 +1,32 @@
+﻿@model Book
+
+<h2>Book Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id
+        </dt>
+        <dd class="col-sm-10">
+            @Model.bookId
+        </dd>
+        <dt class="col-sm-2">
+            Title
+        </dt>
+        <dd class="col-sm-10">
+            @Model.bookName
+        </dd>
+        <dt class="col-sm-2">
+            Author
+        </dt>
+        <dd class="col-sm-10">
+            @Model.bookAuthor
+        </dd>
+       roperties as needed -->
+    </dl>
+</div>
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
