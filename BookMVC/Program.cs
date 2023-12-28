@@ -1,3 +1,7 @@
+using BookMVC.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using System;
+
 namespace BookMVC
 {
     public class Program
@@ -25,11 +29,11 @@ namespace BookMVC
             app.UseRouting();
 
             app.UseAuthorization();
-
+           
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            
             app.Run();
         }
     }

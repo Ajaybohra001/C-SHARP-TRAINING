@@ -1,85 +1,93 @@
-﻿using BookMVC.Models;
+﻿
+using BookMVC.Data;
+using BookMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMVC.Controllers
 {
     public class BookController1 : Controller
     {
-        private List<Book> _books = new List<Book>
-    {
-        new Book { bookId = 1, bookName = "Book 1", bookAuthor = "Author 1" },
-        new Book { bookId = 2, bookName = "Book 2", bookAuthor= "Author 2" }
-       
-    };
+        //private readonly BookDbContext _bookRepository;
+
+        //public BookController1(BookRepository bookrepository)
+        //{
+        //    _bookRepository = bookrepository;
+        //}
+        public List<Book> booksList = new List<Book>()
+        {
+            //new Book(){//bookName="SCience",bookAuthor="Einstien"},
+            //new Book(){bookName="Maths",bookAuthor="Arybhatta"}
+
+
+        };
+
+        [HttpGet]
         public IActionResult Index()
         {
-            return View(_books);
+            var books = booksList;
+            return View(books);
         }
-        public IActionResult Details(int id)
-        {
-            var book = _books.FirstOrDefault(b => b.bookId == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
-
+       // [HttpGet]
+        //public IActionResult Details(int id)
+        //{
+        //    var book = .GetBookById(id);
+        //    if (book == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(book);
+        //}
+        [HttpGet]
         public IActionResult Create()
         {
+            
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Book book)
         {
-            
-            book.bookId = _books.Max(b => b.bookId) + 1;
-            _books.Add(book);
+            var newBook = new Book()
+            {
+                bookId =Guid.NewGuid(),
+                bookName = book.bookName,
+                bookAuthor = book.bookAuthor
+            };
+          
+            booksList.Add(newBook);
             return RedirectToAction("Index");
         }
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    var book = _bookRepository.GetBookById(id);
+        //    return View(book);
+        //}
 
-        public IActionResult Edit(int id)
-        {
-            var book = _books.FirstOrDefault(b => b.bookId == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
+        //[HttpPost]
+        //public IActionResult Edit(Book book)
+        //{
+        //    _bookRepository.UpdateBook(book);
+        //    return RedirectToAction("Edit");
+        //}
+        //[HttpGet]
+        //public IActionResult Delete(int id)
+        //{
+        //    var book = _bookRepository.GetBookById(id);
+        //    if (book == null)
+        //    {
+        //        return NotFound(); 
+        //    }
+        //    return View(book);
+        //}
 
-        [HttpPost]
-        public IActionResult Edit(Book book)
-        {
-            var existingBook = _books.FirstOrDefault(b => b.bookId== book.bookId);
-            if (existingBook != null)
-            {
-                existingBook.bookName = book.bookName;
-                existingBook.bookAuthor = book.bookAuthor;
-            }
-            return RedirectToAction("Index");
-        }
+        //[HttpPost]
+        //public IActionResult DeleteConfirmed(int id)
+        //{
+        //    _bookRepository.DeleteBook(id);
+        //    return RedirectToAction("Index");
+        //}
 
-        public IActionResult Delete(int id)
-        {
-            var book = _books.FirstOrDefault(b => b.bookId == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var book = _books.FirstOrDefault(b => b.bookId== id);
-            if (book != null)
-            {
-                _books.Remove(book);
-            }
-            return RedirectToAction("Index");
-        }
     }
 }

@@ -1,8 +1,13 @@
-﻿namespace BookMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BookMVC.Models
 {
     public class Book
     {
-        public int bookId {  get; set; }
+        [Required]
+        public Guid bookId {  get; set; }
+
+        [StringLength(60,MinimumLength =5)]
         public string bookName { get; set; }    
         public string bookAuthor {  get; set; }
     }
