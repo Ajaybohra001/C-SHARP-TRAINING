@@ -19,6 +19,8 @@ namespace Library
 
         public string personPhoneNo { get; set; }
         
+        public List<Book> books { get; set; }
+        
 
     }
 }

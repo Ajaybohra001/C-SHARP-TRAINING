@@ -8,12 +8,12 @@ using System.Xml.Linq;
 
 namespace Library
 {
-    internal class Connection:DbContext
-        
+    internal class Connection : DbContext
+
     {
-        public Connection(): base() 
-        { 
-           
+        public Connection() : base()
+        {
+
         }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }

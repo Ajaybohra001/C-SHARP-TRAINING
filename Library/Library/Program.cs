@@ -36,9 +36,9 @@ namespace Library
                             var bkName=Console.ReadLine();
 
                             Console.WriteLine("Enter the Author Name.");
-                            var autName=Console.ReadLine(); 
+                            var autName=Console.ReadLine();
 
-                            var book=new Book() {bookId=bkId,bookName= bkName,authorName=autName};
+                            var book = new Book() { bookId = bkId, bookName = bkName, authorName = autName };
                             context.Books.Add(book);
                             
                             Console.WriteLine("Book Added");
@@ -108,24 +108,7 @@ namespace Library
 
 
                 } while (ch);
-                //Book book1 = new Book() { bookId = 1, bookName = "Software Engineering", authorName = "Ajay" };
-                //Book book2 = new Book() { bookId = 2, bookName = "AI ML", authorName = "Prince" };
-                //context.Books.Add(book1);
-                //context.Books.Add(book2);
-                //Console.WriteLine("Book Added");
-
-
-                //var author1 = new Author() { authorId = 101, authorName = "Ajay", authorEmail = "ajaybohra000@gmail.com" };
-                //var author2 = new Author() { authorId = 102, authorName = "Prince", authorEmail = "prince@gmail.com" };
-
-                //context.Authors.Add(author1);
-                //context.Authors.Add(author2);
-                //Console.WriteLine("Author added");
-
-                //var person1 = new Person() { personId = 91, personName = "Utkarsh", personPhoneNo = "8288288812", bookId = 1, dateOfIssue = DateTime.Now, dateOfReturn = DateTime.Parse("05-01-2024") };
-                //context.Persons.Add(person1);
-                //Console.WriteLine("Person Added");
-
+               
 
 
 
